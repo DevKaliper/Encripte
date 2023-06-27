@@ -7,7 +7,7 @@ import UsageLayout from "../Layouts/UsageLayout";
 
 export const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/Encripte/",
         element: <Home />,
         errorElement: <NotFound />,
     },
@@ -18,11 +18,11 @@ export const router = createBrowserRouter([
             children: [
      
                 {
-                    path: "/Encriptation",
+                    path: "/Encripte/Encriptation",
                     element: <Encriptation />,
                 },
                 {
-                    path: "/Desencriptation",
+                    path: "/Encripte/Desencriptation",
                     element: <Desencriptation />,
                 },
             ],
