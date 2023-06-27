@@ -1,13 +1,13 @@
-import { createBrowserRouter } from "react-router-dom";
+import {   createHashRouter } from "react-router-dom"; //  Importar el enrutador "es hash para que github pages funcione"
 import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Encriptation from "../pages/Encriptation";
 import Desencriptation from "../pages/Desencriptation";
 import UsageLayout from "../Layouts/UsageLayout";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
     {
-        path: "/Encripte/",
+        path: "/",
         element: <Home />,
         errorElement: <NotFound />,
     },
@@ -18,11 +18,11 @@ export const router = createBrowserRouter([
             children: [
      
                 {
-                    path: "/Encripte/Encriptation",
+                    path: "/Encriptation",
                     element: <Encriptation />,
                 },
                 {
-                    path: "/Encripte/Desencriptation",
+                    path: "/Desencriptation",
                     element: <Desencriptation />,
                 },
             ],
