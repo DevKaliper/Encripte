@@ -9,25 +9,6 @@
 
 }
 
-#root{
-  @apply h-screen w-screen bg-white dark:bg-slate-900 flex flex-col items-center justify-center
-}
-
-/* Estilos para los botones en el header */
-.botonesHeader{
-  @apply inline-block h-auto w-auto  p-2   outline-none rounded-xl border border-[#66B2FF] hover:bg-slate-400 ease-in-out duration-700 
-}
-
-/* Estilos para los iconos del header */
-.iconosHeader{
-  @apply text-[#66B2FF] text-xl hover:text-white ease-in-out duration-700 
-}
-
-/* Estilos para los text Areas  */
-.textArea{
-  @apply  h-1/2 w-full rounded-2xl shadow-gray-400 border-2  p-2 text-xl text-white bg-transparent
-}
-
 
 
 
