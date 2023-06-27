@@ -21,7 +21,7 @@ const ToggleMode = () => {
     }
   return (
     <>
-      <label  className="swap swap-rotate fixed bottom-5 right-5 z-50 bg-white rounded-full p-1">
+      <label  className="swap swap-rotate fixed bottom-5 md:bottom-1  right-5 z-50 bg-white rounded-full p-1">
         {/* this hidden checkbox controls the state */}
         <input onClick={handleDarkMode} type="checkbox" />
 

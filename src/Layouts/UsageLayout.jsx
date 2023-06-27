@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 const UsageLayout = () => {
     return (
-        <div>
+        <div className="h-screen w-screen relative">
             <nav><Header/></nav>
             <Outlet />
             <ToggleMode />
