@@ -2,6 +2,7 @@ import { useState } from "react";  //  Importar useState
 import {encripter} from '../utils/encripter'  //  Importar las funciones de encriptar y desencriptar
 import { enqueueSnackbar } from 'notistack';  //  Importar el snackbar para mostrar mensajes de error o de éxito
 import DeleteIcon from '@mui/icons-material/Delete';  //  Importar el icono de borrar
+import LockIcon from '@mui/icons-material/Lock'; //  Importar el icono de candado
 
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'; //  Importar el icono de copiar al portapapeles
 
@@ -66,7 +67,7 @@ const handleCopyToClipboard = () => {
   return (
     <>
       <div className="flex min-h-[80vh] w-full flex-col items-center justify-center gap-3">
-        <h2 className="text-2xl font-semibold mb-8 md:text-4xl">Encriptacion</h2>
+        <h2 className="text-2xl font-semibold mb-8 md:text-4xl">Encriptacion </h2>
 
         {/* div donde estarán los text Areas */}
         <div className="flex h-full w-full items-center justify-center gap-3">
@@ -78,7 +79,7 @@ const handleCopyToClipboard = () => {
             onChange={handleChangeEncryptedText}
               placeholder="Escribe aquí tu texto..."
               className="textarea-bordered textarea textarea-lg max-h-full w-full max-w-4xl"></textarea>
-              <button onClick={handleEncryptedText} className="btn glass m-5 md:text-xl">Encriptar</button> 
+              <button onClick={handleEncryptedText} className="btn glass m-5 md:text-xl">Encriptar <LockIcon/></button> 
              
           </div>
 
