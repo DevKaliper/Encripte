@@ -5,7 +5,7 @@ const NotFound = () => {
   console.log(error);
 
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center">
+    <div className="flex h-screen w-screen flex-col items-center justify-center">
       <h1 className="text-5xl">404</h1>
       <div>
         <svg
@@ -25,10 +25,9 @@ const NotFound = () => {
       <p className="text-center">
         Lo sentimos, la pagina a la que intentas acceder no existe.
       </p>
-      <button>
+      <button className="bg-gray-400 btn hover:shadow-2xl shadow-inner">
         <Link to="/">Volver al origen</Link>{" "}
       </button>
-    
     </div>
   );
 };
