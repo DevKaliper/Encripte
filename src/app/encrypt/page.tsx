@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowLeft, Copy, Lock } from 'lucide-react'
+import { ArrowLeft, Copy, Lock, Shield } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -15,16 +15,17 @@ import {
 } from "@/components/ui/select"
 import Link from "next/link"
 
-type EncryptionMethod = 'base64' | 'caesar' | 'reverse' | 'morse'
+type EncryptionMethod = 'base64' | 'caesar' | 'reverse' | 'morse' | 'sha256' | 'aes'
 
 export default function EncryptPage() {
   const [inputText, setInputText] = useState('')
   const [outputText, setOutputText] = useState('')
   const [password, setPassword] = useState('')
   const [method, setMethod] = useState<EncryptionMethod>('base64')
+  const [militaryMethod, setMilitaryMethod] = useState<'sha256' | 'aes'>('sha256')
   const { toast } = useToast()
 
-  const encryptText = (text: string, method: EncryptionMethod, key?: string): string => {
+  const encryptText = async (text: string, method: EncryptionMethod, key?: string): Promise<string> => {
     switch (method) {
       case 'base64':
         return btoa(text)
@@ -61,24 +62,73 @@ export default function EncryptPage() {
           .map(char => morseCode[char] || char)
           .join(' ')
       }
+      case 'sha256': {
+        const encoder = new TextEncoder()
+        const data = encoder.encode(text)
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+        const hashArray = Array.from(new Uint8Array(hashBuffer))
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+      }
+      case 'aes': {
+        if (!key) throw new Error('Password is required for AES encryption')
+        const encoder = new TextEncoder()
+        const data = encoder.encode(text)
+        const passwordBuffer = encoder.encode(key)
+        const salt = crypto.getRandomValues(new Uint8Array(16))
+        const iv = crypto.getRandomValues(new Uint8Array(12))
+        
+        const keyMaterial = await crypto.subtle.importKey(
+          'raw',
+          passwordBuffer,
+          { name: 'PBKDF2' },
+          false,
+          ['deriveBits', 'deriveKey']
+        )
+        
+        const cryptoKey = await crypto.subtle.deriveKey(
+          {
+            name: 'PBKDF2',
+            salt: salt,
+            iterations: 100000,
+            hash: 'SHA-256'
+          },
+          keyMaterial,
+          { name: 'AES-GCM', length: 256 },
+          false,
+          ['encrypt']
+        )
+        
+        const encrypted = await crypto.subtle.encrypt(
+          { name: 'AES-GCM', iv: iv },
+          cryptoKey,
+          data
+        )
+        
+        const encryptedArray = new Uint8Array(encrypted)
+        const result = new Uint8Array(salt.length + iv.length + encryptedArray.length)
+        result.set(salt, 0)
+        result.set(iv, salt.length)
+        result.set(encryptedArray, salt.length + iv.length)
+        
+        return btoa(String.fromCharCode.apply(null, Array.from(result)))
+      }
       default:
         return text
     }
   }
 
-  const encrypt = () => {
+  const encrypt = async () => {
     try {
-      const encrypted = encryptText(inputText, method, password)
+      const encrypted = await encryptText(inputText, method === 'sha256' || method === 'aes' ? militaryMethod : method, password)
       setOutputText(encrypted)
       toast({
         title: "Text encrypted successfully!",
         description: "Your text has been securely encrypted.",
       })
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast({
         title: "Encryption failed",
-        description: "There was an error encrypting your text.",
+        description: error instanceof Error ? error.message : "There was an error encrypting your text.",
         variant: "destructive",
       })
     }
@@ -94,24 +144,7 @@ export default function EncryptPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-red-600">Encripte</Link>
-            <nav>
-              <Button variant="ghost" className="text-gray-600 hover:text-red-600">
-                About
-              </Button>
-              <Button variant="ghost" className="text-gray-600 hover:text-red-600">
-                Contact
-              </Button>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
+     
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
           <Link href="/" className="inline-flex items-center text-red-600 hover:text-red-700 mb-6">
@@ -149,21 +182,39 @@ export default function EncryptPage() {
                     <SelectItem value="caesar">Caesar Cipher</SelectItem>
                     <SelectItem value="reverse">Reverse Text</SelectItem>
                     <SelectItem value="morse">Morse Code</SelectItem>
+                    <SelectItem value="sha256" className='text-red-500'>Military-grade Encryption</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
-              {method === 'caesar' && (
+              {method === 'sha256' && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Military-grade Method
+                  </label>
+                  <Select value={militaryMethod} onValueChange={(value) => setMilitaryMethod(value as 'sha256' | 'aes')}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select military-grade method" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="sha256">SHA256</SelectItem>
+                      <SelectItem value="aes">AES</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              {(method === 'caesar' || (method === 'sha256' && militaryMethod === 'aes')) && (
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Shift Amount (1-25)
+                    {method === 'caesar' ? 'Shift Amount (1-25)' : 'Encryption Key'}
                   </label>
                   <Input
                     id="password"
-                    type="number"
-                    min="1"
-                    max="25"
-                    placeholder="Enter shift amount (default: 3)"
+                    type={method === 'caesar' ? 'number' : 'password'}
+                    min={method === 'caesar' ? "1" : undefined}
+                    max={method === 'caesar' ? "25" : undefined}
+                    placeholder={method === 'caesar' ? "Enter shift amount (default: 3)" : "Enter encryption key"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full border-gray-300 focus:border-red-500 focus:ring-red-500"
@@ -175,9 +226,13 @@ export default function EncryptPage() {
             <Button 
               onClick={encrypt}
               className="w-full bg-red-600 hover:bg-red-700 text-white"
-              disabled={!inputText}
+              disabled={!inputText || (method === 'sha256' && militaryMethod === 'aes' && !password)}
             >
-              <Lock className="mr-2 h-4 w-4" />
+              {method === 'sha256' ? (
+                <Shield className="mr-2 h-4 w-4" />
+              ) : (
+                <Lock className="mr-2 h-4 w-4" />
+              )}
               Encrypt Text
             </Button>
 
@@ -205,14 +260,7 @@ export default function EncryptPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t mt-12">
-        <div className="container mx-auto px-4 py-8">
-          <div className="text-center text-gray-600">
-            <p>&copy; 2024 Encripte. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+    
     </div>
   )
 }
