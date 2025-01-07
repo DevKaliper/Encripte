@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Encripte
 
-## Getting Started
+**Encripte** is a web application that allows users to protect their sensitive information using military-grade encryption. With this tool, you can encrypt text to secure it and decrypt it whenever needed.
 
-First, run the development server:
+## 🛠️ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Secure Encryption**: Uses industry-standard encryption algorithms to keep your data safe.
+- **Lightning Fast**: Quick encryption and decryption processes with no delays.
+- **Privacy First**: Your data never leaves your browser, ensuring maximum privacy.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Key Functionalities
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Encrypt**: Transform your text into a secure, encrypted format with just one click.
+- **Decrypt**: Convert encrypted text back to its original form easily.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎨 User Interface
 
-## Learn More
+- **Modern and Minimalist Design**: A clean and easy-to-use interface with clear options for encryption and decryption.
+- **Focus on Usability**: Intuitive and fast navigation.
 
-To learn more about Next.js, take a look at the following resources:
+## 📸 Preview
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![image](https://github.com/user-attachments/assets/d46b44e3-7568-4ff0-a75a-68fbaa920d7a)
