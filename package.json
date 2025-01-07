@@ -2,14 +2,11 @@
   "name": "encripte",
   "version": "2.0.0",
   "private": true,
-  "homepage": "https://devkaliper.github.io/Encripte",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "export": "next build && next export",
-    "deploy": "npm run build && gh-pages -d out"
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.1.4",
