@@ -1,42 +1,23 @@
-# Encrypte
-![image](https://github.com/DevKaliper/CriptoText/assets/122651755/1bf36aa3-85de-42ae-8600-f12f5e6205a9)
+# Encripte
 
-<hr/>
+**Encripte** is a web application that allows users to protect their sensitive information using military-grade encryption. With this tool, you can encrypt text to secure it and decrypt it whenever needed.
 
-### Encriptación
-![image](https://github.com/DevKaliper/Encripte/assets/122651755/bb45517d-9565-44e2-bc6f-0e50b7d8f531)
+## 🛠️ Features
 
+- **Secure Encryption**: Uses industry-standard encryption algorithms to keep your data safe.
+- **Lightning Fast**: Quick encryption and decryption processes with no delays.
+- **Privacy First**: Your data never leaves your browser, ensuring maximum privacy.
 
-<hr/>
+## 🚀 Key Functionalities
 
-### Desencriptación
-![image](https://github.com/DevKaliper/Encripte/assets/122651755/9a72c300-4b09-444d-bd23-558e3a6717d9)
+- **Encrypt**: Transform your text into a secure, encrypted format with just one click.
+- **Decrypt**: Convert encrypted text back to its original form easily.
 
+## 🎨 User Interface
 
-<hr/>
+- **Modern and Minimalist Design**: A clean and easy-to-use interface with clear options for encryption and decryption.
+- **Focus on Usability**: Intuitive and fast navigation.
 
-## Dark mode
-![image](https://github.com/DevKaliper/Encripte/assets/122651755/7dce3b7b-a551-4556-8aaf-2fc564ae8d42)
+## 📸 Preview
 
-<hr/>
-
-![image](https://github.com/DevKaliper/Encripte/assets/122651755/9cf80700-89d4-40ac-ba19-075449244ad5)
-
-
-### Responsive
-
-![image](https://github.com/DevKaliper/Encripte/assets/122651755/e0594032-76d3-48b4-a689-ceb14c30ecd1)
-
-<hr/>
-
-![image](https://github.com/DevKaliper/Encripte/assets/122651755/74bae3f6-61dc-4e0f-a54f-672c69db71da)
-
-
-
-
-
-
-
-
-
-
+![image](https://github.com/user-attachments/assets/d46b44e3-7568-4ff0-a75a-68fbaa920d7a)
